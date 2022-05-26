@@ -1,5 +1,6 @@
 package br.com.zup.edu.cadastrolivro;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.ISBN;
 
 import javax.validation.constraints.NotBlank;
@@ -15,10 +16,10 @@ public class LivroRequest {
     @NotBlank @Size(max = 4000)
     private String descricao;
 
-    @NotNull @Past
+    @NotNull @Past @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataPublicacao;
 
-    @ISBN
+    @ISBN(type = ISBN.Type.ANY)
     private String isbn;
 
     public LivroRequest(String titulo, String descricao, LocalDate dataPublicacao, String isbn) {
